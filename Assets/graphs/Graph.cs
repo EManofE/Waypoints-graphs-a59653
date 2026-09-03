@@ -66,6 +66,7 @@ public class Graph
         Node thisNode = open[i];
         if(thisNode.getId()==endId)
         {
+            ReconstructPath(start,end);
             return true;
         }
 
@@ -101,6 +102,20 @@ public class Graph
         }
     }
     return false;
+   }
+
+   public void ReconstructPath(Node starId,Node endId)
+   {
+    pathlist.Clear();
+    pathlist.Add(endId);
+
+    var p = endId.cameFrom;
+    while(p != starId && p != null)
+    {
+        pathlist.Insert(0,p);
+        p = p.cameFrom;
+    }
+    pathlist.Insert(0,starId);
    }
 
    float distance(Node a, Node b)
