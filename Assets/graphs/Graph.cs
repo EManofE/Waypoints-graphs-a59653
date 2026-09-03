@@ -41,4 +41,90 @@ public class Graph
     return null;
    }
 
+
+   public bool AStar(GameObject starId, GameObject endId)
+   {
+    Node start = FindNode(starId);
+    Node end = FindNode(endId);
+
+    if(start==null || end ==null)
+    return false;
+
+    List<Node> open = new List<Node>();
+    List<Node> closed = new List<Node>();
+    float tentativegscore = 0;
+    bool tentativeisbetter;
+
+    start.g=0;
+    start.h=distance(start,end);
+    start.f = start.h;
+
+    open.Add(start);
+    while(open.Count >0)
+    {
+        int i = lowestF(open);
+        Node thisNode = open[i];
+        if(thisNode.getId()==endId)
+        {
+            return true;
+        }
+
+        open.RemoveAt(i);
+        closed.Add(thisNode);
+        Node neighbour;
+        foreach(Edge e in thisNode.edgelist)
+        {
+            neighbour = e.endnode;
+            if(closed.IndexOf(neighbour)>-1)
+            continue;
+
+            tentativegscore = thisNode.g + distance(thisNode,neighbour);
+            if(open.IndexOf(neighbour)== -1)
+            {
+                open.Add(neighbour);
+                tentativeisbetter=true;
+            }
+            else if(tentativegscore < neighbour.g)
+            {
+                tentativeisbetter = true;
+            }
+            else 
+            tentativeisbetter=false;
+
+            if(tentativeisbetter)
+            {
+                neighbour.cameFrom=thisNode;
+                neighbour.g =tentativegscore;
+                neighbour.h = distance(thisNode,end);
+                neighbour.f= neighbour.g + neighbour.h;
+            }
+        }
+    }
+    return false;
+   }
+
+   float distance(Node a, Node b)
+   {
+    return (Vector3.SqrMagnitude(a.getId().transform.position - b.getId().transform.position));
+   }
+
+   int lowestF(List<Node> l)
+   {
+    float lowestf = 0;
+    int count = 0;
+    int iteratorCount = 0;
+
+    lowestf = l[0].f;
+
+    for(int i =1; i<l.Count;i++)
+    {
+        if(l[i].f<lowestf)
+        {
+            iteratorCount = count;
+        }
+        count++;
+    }
+    return iteratorCount;
+   }
+
 }
