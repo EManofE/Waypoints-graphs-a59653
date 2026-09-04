@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 4044426278781828}
   - component: {fileID: 23909521101859236}
   - component: {fileID: 102193324289674306}
+  - component: {fileID: 8277139213507888346}
   m_Layer: 0
   m_Name: wpname
   m_TagString: Untagged
@@ -203,7 +204,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404738568436082}
-  m_Text: WP001
+  m_Text: WayPoint
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -217,3 +218,15 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &8277139213507888346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404738568436082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7319bc04d6271c4cbdec623f37fc40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaypointDebug

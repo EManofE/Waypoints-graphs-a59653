@@ -42,9 +42,16 @@ public class Graph
    }
 
 
-   public bool AStar(GameObject starId, GameObject endId)
+   public bool AStar(GameObject startId, GameObject endId)
    {
-    Node start = FindNode(starId);
+
+    if(startId == endId)
+    {
+        pathlist.Clear();
+        return false;
+    }
+    
+    Node start = FindNode(startId);
     Node end = FindNode(endId);
 
     if(start==null || end ==null)
@@ -60,6 +67,7 @@ public class Graph
     start.f = start.h;
 
     open.Add(start);
+
     while(open.Count >0)
     {
         int i = lowestF(open);
@@ -104,18 +112,18 @@ public class Graph
     return false;
    }
 
-   public void ReconstructPath(Node starId,Node endId)
+   public void ReconstructPath(Node startId,Node endId)
    {
     pathlist.Clear();
     pathlist.Add(endId);
 
     var p = endId.cameFrom;
-    while(p != starId && p != null)
+    while(p != startId && p != null)
     {
         pathlist.Insert(0,p);
         p = p.cameFrom;
     }
-    pathlist.Insert(0,starId);
+    pathlist.Insert(0,startId);
    }
 
    float distance(Node a, Node b)
@@ -125,16 +133,17 @@ public class Graph
 
    int lowestF(List<Node> l)
    {
-    float lowestf = 0;
+    float lowestF = 0;
     int count = 0;
     int iteratorCount = 0;
 
-    lowestf = l[0].f;
+    lowestF = l[0].f;
 
     for(int i =1; i<l.Count;i++)
     {
-        if(l[i].f<lowestf)
+        if(l[i].f<lowestF)
         {
+            lowestF = l[i].f;
             iteratorCount = count;
         }
         count++;

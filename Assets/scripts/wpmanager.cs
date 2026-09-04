@@ -1,9 +1,4 @@
-
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
-
 
 [System.Serializable]
 public struct Link
@@ -13,20 +8,21 @@ public struct Link
     public GameObject node2;
     public direction dir;
 }
-public class wpmanager : MonoBehaviour
+public class WPmanager : MonoBehaviour
 {
 
     public GameObject[] waypoints;
     public Link[] links;
     public Graph graph = new Graph();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {
-        if(waypoints.Length>0)
+        if(waypoints.Length >0)
         {
             foreach(GameObject wp in waypoints)
             {
                 graph.AddNode(wp);
+                
             }
 
             foreach(Link l in links)
